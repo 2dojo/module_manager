@@ -17,15 +17,6 @@ class EventDispatcherTest extends TestCase
 
     /**
      * @covers \TwoDojo\ModuleManager\Support\EventDispatcher::registerListener()
-     */
-    public function testCanRegisterListener()
-    {
-        $dispatcher = new EventDispatcher();
-
-        $dispatcher->registerListener(m::mock(EventListener::class));
-    }
-
-    /**
      * @covers \TwoDojo\ModuleManager\Support\EventDispatcher::dispatchEvent()
      */
     public function testCanDispatchEvent()
@@ -41,5 +32,7 @@ class EventDispatcherTest extends TestCase
         $dispatcher->registerListener($mock);
 
         $dispatcher->dispatchEvent('test', 'testEvent', $arguments);
+
+        $mock->shouldHaveReceived('onEventReceived');
     }
 }
