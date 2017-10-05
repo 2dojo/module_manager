@@ -1,8 +1,10 @@
 
 # Module manager
 
-[![Build Status](https://travis-ci.org/2dojo/module_manager.svg?branch=master)](https://travis-ci.org/2dojo/module_manager)
 [![Latest Stable Version](https://poser.pugx.org/2dojo/module_manager/v/stable)](https://packagist.org/packages/2dojo/module_manager)
+[![Build Status](https://travis-ci.org/2dojo/module_manager.svg?branch=master)](https://travis-ci.org/2dojo/module_manager)
+[![codecov](https://codecov.io/gh/2dojo/module_manager/branch/master/graph/badge.svg)](https://codecov.io/gh/2dojo/module_manager)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/2dojo/module_manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/2dojo/module_manager/?branch=master)
 [![License](https://poser.pugx.org/2dojo/module_manager/license)](https://packagist.org/packages/2dojo/module_manager)
 
 ## Table of contents
