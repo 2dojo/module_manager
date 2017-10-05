@@ -161,7 +161,7 @@ class FileRegistry extends BaseRegistry
      * Apply the registered scopes
      *
      * @param $target
-     * @return Collection|static
+     * @return Collection
      */
     protected function applyScopes($target)
     {

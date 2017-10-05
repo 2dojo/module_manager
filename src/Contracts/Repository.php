@@ -6,7 +6,7 @@ interface Repository
 {
     /**
      * @param array $attributes
-     * @return boolean
+     * @return mixed
      */
     public function save(array $attributes);
 

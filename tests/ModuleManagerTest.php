@@ -106,6 +106,7 @@ class ModuleManagerTest extends TestCase
     /**
      * @covers \TwoDojo\ModuleManager\ModuleManager::enableModule()
      * @covers \TwoDojo\ModuleManager\ModuleManager::updateModuleRecord()
+     * @covers \TwoDojo\ModuleManager\ModuleManager::setModuleState()
      */
     public function testCanEnableModule()
     {
@@ -122,6 +123,7 @@ class ModuleManagerTest extends TestCase
     /**
      * @covers \TwoDojo\ModuleManager\ModuleManager::disableModule()
      * @covers \TwoDojo\ModuleManager\ModuleManager::updateModuleRecord()
+     * @covers \TwoDojo\ModuleManager\ModuleManager::setModuleState()
      */
     public function testCanDisableModule()
     {

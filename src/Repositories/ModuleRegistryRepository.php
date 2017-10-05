@@ -8,6 +8,11 @@ use TwoDojo\ModuleManager\Exceptions\UnknownRegistryTypeException;
 use TwoDojo\ModuleManager\Registries\EloquentRegistry;
 use TwoDojo\ModuleManager\Registries\FileRegistry;
 
+/**
+ * Class ModuleRegistryRepository
+ *
+ * @method \TwoDojo\ModuleManager\Repositories\ModuleRegistryRepository enabled()
+ */
 class ModuleRegistryRepository implements Repository
 {
     /**

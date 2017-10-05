@@ -5,7 +5,6 @@ namespace TwoDojo\ModuleManager;
 use Illuminate\Support\Facades\Route;
 use TwoDojo\Module\AbstractModule;
 use TwoDojo\ModuleManager\Exceptions\ModuleNotFoundException;
-use TwoDojo\ModuleManager\Repositories\ModuleRegistryRepository;
 use TwoDojo\ModuleManager\Support\EventDispatcher;
 use TwoDojo\ModuleManager\Support\Requester;
 
@@ -53,7 +52,7 @@ class ModuleManager
      * @param string $module
      * @return bool
      */
-    public function registerModule($module)
+    public function registerModule($module) : bool
     {
         $module = $this->app->make($module);
 
@@ -87,7 +86,7 @@ class ModuleManager
      * @param string $uniqueName
      * @return bool
      */
-    public function hasModule(string $uniqueName)
+    public function hasModule(string $uniqueName) : bool
     {
         return $this->modules->has($uniqueName);
     }
@@ -156,7 +155,7 @@ class ModuleManager
     /**
      * Enable a module
      *
-     * @param $uniqueName
+     * @param string $uniqueName
      * @return bool
      * @throws ModuleNotFoundException
      */
@@ -166,13 +165,7 @@ class ModuleManager
             throw new ModuleNotFoundException();
         }
 
-        $module = $this->getModule($uniqueName);
-        $saved = $this->updateModuleRecord($module, ['is_enabled' => true]);
-        if ($saved) {
-            $this->dispatcher->dispatchEvent($module->getUniqueName(), 'enabled');
-        }
-
-        return $saved;
+        return $this->setModuleState($uniqueName, true);
     }
 
     /**
@@ -188,11 +181,21 @@ class ModuleManager
             throw new ModuleNotFoundException();
         }
 
+        return $this->setModuleState($uniqueName, false);
+    }
+
+    /**
+     * @param $uniqueName
+     * @param bool $isEnabled
+     * @return bool
+     */
+    protected function setModuleState($uniqueName, bool $isEnabled) : bool
+    {
         $module = $this->getModule($uniqueName);
 
-        $saved = $this->updateModuleRecord($module, ['is_enabled' => false]);
+        $saved = $this->updateModuleRecord($module, ['is_enabled' => $isEnabled]);
         if ($saved) {
-            $this->dispatcher->dispatchEvent($module->getUniqueName(), 'enabled');
+            $this->dispatcher->dispatchEvent($module->getUniqueName(), $isEnabled ? 'enabled' : 'disabled');
         }
 
         return $saved;
@@ -203,7 +206,7 @@ class ModuleManager
      * @param array $data
      * @return bool
      */
-    protected function updateModuleRecord($module, array $data)
+    protected function updateModuleRecord($module, array $data) : bool
     {
         $record = $this->registry->find($module->getUniqueName())->first();
         if ($record === null) {
